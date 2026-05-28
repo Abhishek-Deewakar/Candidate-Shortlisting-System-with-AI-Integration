@@ -9,9 +9,12 @@ const app = express();
 const corsOptions = {
   origin: [
     'https://candidate-shortlisting-system-with-ai-2lc7.onrender.com',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://localhost:5000'
   ],
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 };
 app.use(cors(corsOptions));
 app.use(express.json());
