@@ -16,6 +16,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Trust proxy (important for Render deployment)
+app.set('trust proxy', 1);
+// Allow any host header
+app.use((req, res, next) => {
+  res.removeHeader('X-Powered-By');
+  next();
+});
+
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
