@@ -6,7 +6,14 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'https://candidate-shortlisting-system-with-ai-2lc7.onrender.com',
+    'http://localhost:3000'
+  ],
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database Connection
