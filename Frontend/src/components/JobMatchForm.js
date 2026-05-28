@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import ShortlistedCandidates from './ShortlistedCandidates';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://candidate-shortlisting-system-with-ai-3ium.onrender.com';
+
 function JobMatchForm() {
   const [formData, setFormData] = useState({
     requiredSkills: [],
@@ -51,7 +53,7 @@ function JobMatchForm() {
         return;
       }
 
-      const endpoint = formData.useAI ? '/api/ai/shortlist' : '/api/match';
+      const endpoint = formData.useAI ? `${API_URL}/api/ai/shortlist` : `${API_URL}/api/match`;
       const response = await axios.post(endpoint, {
         requiredSkills: formData.requiredSkills,
         minExperience: parseInt(formData.minExperience),

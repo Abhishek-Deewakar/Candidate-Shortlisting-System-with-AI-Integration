@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://candidate-shortlisting-system-with-ai-3ium.onrender.com';
+
 function CandidateForm({ onCandidateAdded }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -52,7 +54,7 @@ function CandidateForm({ onCandidateAdded }) {
         return;
       }
 
-      const response = await axios.post('/api/candidates', formData);
+      const response = await axios.post(`${API_URL}/api/candidates`, formData);
       setMessage('✅ ' + response.data.message);
       
       // Reset form

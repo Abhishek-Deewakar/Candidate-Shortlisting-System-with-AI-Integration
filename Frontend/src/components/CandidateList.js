@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://candidate-shortlisting-system-with-ai-3ium.onrender.com';
+
 function CandidateList({ refreshTrigger }) {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ function CandidateList({ refreshTrigger }) {
   const fetchCandidates = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/candidates');
+      const response = await axios.get(`${API_URL}/api/candidates`);
       setCandidates(response.data.candidates);
       setMessage('');
     } catch (error) {
@@ -26,7 +28,7 @@ function CandidateList({ refreshTrigger }) {
   const deleteCandidate = async (id) => {
     if (window.confirm('Are you sure you want to delete this candidate?')) {
       try {
-        await axios.delete(`/api/candidates/${id}`);
+        await axios.delete(`${API_URL}/api/candidates/${id}`);
         setMessage('✅ Candidate deleted successfully');
         fetchCandidates();
       } catch (error) {
